@@ -24,6 +24,11 @@ pipeline {
                 echo "Skipping tests for now"
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                echo "SonarQube analysis stage placeholder"
+            }
+        }
         stage('Docker Build & Push') {
             steps {
                 script {

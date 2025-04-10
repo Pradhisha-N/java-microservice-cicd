@@ -14,10 +14,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    def mvnHome = tool 'Maven3'
-                    sh "mvn clean package"
-                }
+                sh 'mvn clean package'
             }
         }
 

@@ -14,7 +14,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                script {
+                    def mvnHome = tool 'Maven3'
+                    sh "${mvnHome}/bin/mvn clean package"
+                }
             }
         }
 
@@ -25,7 +28,6 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-            
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-credentials-id') {
@@ -37,7 +39,9 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            
+            when {
+                branch 'main'
+            }
             steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'

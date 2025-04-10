@@ -28,7 +28,7 @@ pipeline {
             
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub-credentials') {
+                    docker.withRegistry('', 'dockerhub-credentials-id') {
                         sh 'docker build -t $IMAGE .'
                         sh 'docker push $IMAGE'
                     }

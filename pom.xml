@@ -11,7 +11,7 @@
   <build>
     <sourceDirectory>${basedir}</sourceDirectory>
     <plugins>
-      <!-- Compile plugin -->
+      <!-- Compile Java 11 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -22,7 +22,7 @@
         </configuration>
       </plugin>
 
-      <!-- Package plugin -->
+      <!-- Package as jar with main class -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>

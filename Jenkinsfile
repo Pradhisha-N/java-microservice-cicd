@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     def mvnHome = tool 'Maven3'
-                    sh "${mvnHome}/bin/mvn clean package"
+                    sh "$usr/share/maven/bin/mvn clean package"
                 }
             }
         }

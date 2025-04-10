@@ -6,6 +6,12 @@ pipeline {
     }
 
     stages {
+        stage('Clone Repo') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -19,9 +25,7 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-            when {
-                branch 'develop'
-            }
+            
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-credentials') {
@@ -33,9 +37,7 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            when {
-                branch 'develop'
-            }
+            
             steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'

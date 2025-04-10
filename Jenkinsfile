@@ -18,6 +18,12 @@ pipeline {
             }
         }
 
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+
         stage('Test') {
             steps {
                 echo "Skipping tests for now"
@@ -36,9 +42,6 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            when {
-                branch 'main'
-            }
             steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'
